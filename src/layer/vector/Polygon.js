@@ -66,7 +66,7 @@ L.Polygon = L.Polyline.extend({
 	getCenter: function () {
 		var latlngs = this._latlngs,
 			len = latlngs.length,
-			i, j, p1, p2, f, center;
+			i, j, p1, p2, f, area, lat, lng, center;
 
 		for (i = 0, j = len - 1, area = 0, lat = 0, lng = 0; i < len; j = i++) {
 			p1 = latlngs[i];

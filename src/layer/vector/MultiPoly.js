@@ -51,7 +51,7 @@
 		var bestCenter,
 			minArea = Infinity;
 
-		this.eachLayer(function(layer) {
+		this.eachLayer(function (layer) {
 			var center = layer.getCenter();
 
 			if (center.area < minArea) {
