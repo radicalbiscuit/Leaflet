@@ -47,6 +47,22 @@
 	L.MultiPolyline = createMulti(L.Polyline);
 	L.MultiPolygon = createMulti(L.Polygon);
 
+	L.MultiPolygon.prototype.getCenter = function () {
+		var bestCenter,
+			minArea = Infinity;
+
+		this.eachLayer(function(layer) {
+			var center = layer.getCenter();
+
+			if (center.area < minArea) {
+				minArea = center.area;
+				bestCenter = center;
+			}
+		});
+
+		return bestCenter;
+	};
+
 	L.multiPolyline = function (latlngs, options) {
 		return new L.MultiPolyline(latlngs, options);
 	};

@@ -63,6 +63,26 @@ L.Polygon = L.Polyline.extend({
 		}
 	},
 
+	getCenter: function () {
+		var latlngs = this._latlngs,
+			len = latlngs.length,
+			i, j, p1, p2, f, center;
+
+		for (i = 0, j = len - 1, area = 0, lat = 0, lng = 0; i < len; j = i++) {
+			p1 = latlngs[i];
+			p2 = latlngs[j];
+			f = p1.lat * p2.lng - p2.lat * p1.lng;
+			lat += (p1.lat + p2.lat) * f;
+			lng += (p1.lng + p2.lng) * f;
+			area += f / 2;
+		}
+
+		center = area ? new L.LatLng(lat / (6 * area), lng / (6 * area)) : latlngs[0];
+		center.area = area;
+
+		return center;
+	},
+
 	_clipPoints: function () {
 		var points = this._originalPoints,
 		    newParts = [];
